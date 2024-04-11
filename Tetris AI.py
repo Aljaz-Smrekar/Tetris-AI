@@ -25,7 +25,7 @@ for _ in range(1000):
 env.close()
 
 # Create the environment
-env = gym.make("CartPole-v1")
+env = gym.make("ALE/Tetris-v5")
 
 # Set seed for experiment reproducibility
 seed = 42
