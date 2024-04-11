@@ -22,14 +22,6 @@ np.random.seed(seed)
 eps = np.finfo(np.float32).eps.item()
 
 
-
-
-
-
-
-
-
-
 # %%
 
 class ActorCritic(tf.keras.Model):
@@ -56,14 +48,6 @@ num_hidden_units = 128
 model = ActorCritic(num_actions, num_hidden_units)
 
 
-
-
-
-
-
-
-
-
 # %%
 
 # Wrap Gym's `env.step` call as an operation in a TensorFlow function.
@@ -77,11 +61,6 @@ def env_step(action: np.ndarray) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
   return (state.astype(np.float32),
           np.array(reward, np.int32),
           np.array(done, np.int32))
-
-
-
-
-
 
 
 # %%
@@ -133,12 +112,6 @@ def run_episode(
 
 
 
-
-
-
-
-
-
 # %%
 def get_expected_return(
     rewards: tf.Tensor,
@@ -168,18 +141,6 @@ def get_expected_return(
   return returns
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 # %%
 huber_loss = tf.keras.losses.Huber(reduction=tf.keras.losses.Reduction.SUM)
 
@@ -197,15 +158,6 @@ def compute_loss(
   critic_loss = huber_loss(values, returns)
 
   return actor_loss + critic_loss
-
-
-
-
-
-
-
-
-
 
 
 # %%
@@ -246,19 +198,6 @@ def train_step(
   episode_reward = tf.math.reduce_sum(rewards)
 
   return episode_reward
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 # %%time
@@ -305,13 +244,6 @@ print(f'\nSolved at episode {i}: average reward: {running_reward:.2f}!')
 save_filename = "cart_model.keras"
 model.save(save_filename)
 print(f"Saved model to {save_filename}")
-
-
-
-
-
-
-
 
 
 # %%
